@@ -8,7 +8,7 @@ namespace dbaccess.helper.tools
     /// 基础仓储接口
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    interface IRepository<T>where T:class,new()
+    interface IRepository<T> where T : class, new()
     {
         /// <summary>
         /// 单条数据
@@ -16,7 +16,7 @@ namespace dbaccess.helper.tools
         /// <param name="connStr"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        T Get(string connStr,object id);
+        T Get(string connStr, object id);
         /// <summary>
         /// 获取所有
         /// </summary>
@@ -29,47 +29,31 @@ namespace dbaccess.helper.tools
         /// <param name="connStr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        int Insert(string connStr,T obj);
-        /// <summary>
-        /// 批量插入
-        /// </summary>
-        /// <param name="connStr"></param>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        int Insert(string connStr,IEnumerable<T> list);
+        TKey Insert<TKey>(string connStr, T obj);
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="connStr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        bool Update(string connStr,T obj);
+        bool Update(string connStr, T obj);
         /// <summary>
-        /// 批量更新
+        /// 根据id删除
         /// </summary>
         /// <param name="connStr"></param>
-        /// <param name="list"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        bool Update(string connStr,IEnumerable<T> list);
+        bool Delete(string connStr, object id);
         /// <summary>
-        /// 删除
+        /// 根据条件删除
         /// </summary>
         /// <param name="connStr"></param>
-        /// <param name="obj"></param>
+        /// <param name="conditions"></param>
+        /// <param name="param"></param>
         /// <returns></returns>
-        bool Delete(string connStr,T obj);
-        /// <summary>
-        /// 批量删除
-        /// </summary>
-        /// <param name="connStr"></param>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        bool Delete(string connStr,IEnumerable<T> list);
-        /// <summary>
-        /// 删除所有
-        /// </summary>
-        /// <param name="connStr"></param>
-        /// <returns></returns>
-        bool DeleteAll(string connStr);
+        bool Delete(string connStr, string conditions, object param);
+
+
+
     }
 }

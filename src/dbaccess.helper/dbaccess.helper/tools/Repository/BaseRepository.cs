@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Dapper.Contrib;
-using System.Linq;
-using Dapper.Contrib.Extensions;
 
+using System.Linq;
+using Dapper;
 namespace dbaccess.helper.tools.Repository
 {
     /// <summary>
@@ -19,30 +18,22 @@ namespace dbaccess.helper.tools.Repository
             _dbSession = DapperSession.DbSession;
         }
 
-        public bool Delete(string connStr, T obj)
+        public bool Delete(string connStr, object id)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
-               return  conn.Delete(obj);
+                
+               return  conn.Delete<T>(id)>0;
             }
         }
 
-        public bool Delete(string connStr, IEnumerable<T> list)
+        public bool Delete(string connStr, string conditions, object param)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
-                return conn.Delete(list);
+                return conn.DeleteList<T>(conditions, param)>0;
             }
         }
-
-        public bool DeleteAll(string connStr)
-        {
-            using (var conn=_dbSession.GetDbConn(connStr))
-            {
-                return conn.DeleteAll<T>();
-            }
-        }
-
         public T Get(string connStr, object id)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
@@ -55,39 +46,25 @@ namespace dbaccess.helper.tools.Repository
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
-                return conn.GetAll<T>();
+                return conn.GetList<T>();
             }
         }
 
-        public int Insert(string connStr, T obj)
+        public TKey Insert<TKey>(string connStr, T obj)
         {
             using (var conn = _dbSession.GetDbConn(connStr))
             {
-                return Convert.ToInt32(conn.Insert(obj));
+               return conn.Insert<TKey,T>(obj);
             }
         }
 
-        public int Insert(string connStr, IEnumerable<T> list)
-        {
-            using (var conn = _dbSession.GetDbConn(connStr))
-            {
-                return Convert.ToInt32(conn.Insert(list));
-            }
-        }
+       
 
         public bool Update(string connStr, T obj)
         {
             using (var conn = _dbSession.GetDbConn(connStr))
             {
-                return conn.Update(obj);
-            }
-        }
-
-        public bool Update(string connStr, IEnumerable<T> list)
-        {
-            using (var conn = _dbSession.GetDbConn(connStr))
-            {
-                return conn.Update(list);
+                return conn.Update(obj)>0;
             }
         }
     }
