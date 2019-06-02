@@ -61,6 +61,6 @@ namespace dbaccess.helper.tools
         /// <param name=""></param>
         /// <returns></returns>
         int Count(string connStr, string conditions = "", object parameters = null);
-
+        
     }
 }

@@ -35,7 +35,7 @@ namespace dbaccess.helper
             //});
             //5.数量
             //int count= user.Count(connStr);
-            Console.WriteLine(count);
+           // Console.WriteLine(count);
             Console.ReadKey();
         }
     }
