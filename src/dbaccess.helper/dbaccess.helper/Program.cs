@@ -8,8 +8,8 @@ namespace dbaccess.helper
     {
         static void Main(string[] args)
         {
-            string connStr = "PORT=5432;DATABASE=test;HOST=localhost;PASSWORD=root;USER ID=postgres";
-            UserRepository user = new UserRepository();
+            //string connStr = "PORT=5432;DATABASE=test;HOST=localhost;PASSWORD=root;USER ID=postgres";
+            //UserRepository user = new UserRepository();
             //1.增
             //var result = user.Add<string>(connStr, new User()
             //{
@@ -36,7 +36,7 @@ namespace dbaccess.helper
             //5.数量
             //int count= user.Count(connStr);
            // Console.WriteLine(count);
-            Console.ReadKey();
+           // Console.ReadKey();
         }
     }
 }
