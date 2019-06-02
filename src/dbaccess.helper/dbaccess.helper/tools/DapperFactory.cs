@@ -40,7 +40,7 @@ namespace dbaccess.helper.tools
                 default:
                     throw new NotImplementedException("未实现");
             }
-            if (conn != null)
+            if (conn != null&&GetDialect()!=_dataBaseType.ToString())
                 SetDialect(_dataBaseType);
             return conn;
         }

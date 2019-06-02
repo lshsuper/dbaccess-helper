@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using System.Linq;
 using Dapper;
 namespace dbaccess.helper.tools.Repository
@@ -18,7 +17,7 @@ namespace dbaccess.helper.tools.Repository
             _dbSession = DapperSession.DbSession;
         }
 
-        public bool Delete(string connStr, object id)
+        public bool Remove(string connStr, object id)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
@@ -27,14 +26,14 @@ namespace dbaccess.helper.tools.Repository
             }
         }
 
-        public bool Delete(string connStr, string conditions, object param)
+        public bool Remove(string connStr, string conditions, object param)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
                 return conn.DeleteList<T>(conditions, param)>0;
             }
         }
-        public T Get(string connStr, object id)
+        public T Find(string connStr, object id)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
@@ -42,7 +41,7 @@ namespace dbaccess.helper.tools.Repository
             }
         }
 
-        public IEnumerable<T> GetAll(string connStr)
+        public IEnumerable<T> Query(string connStr)
         {
             using (var conn=_dbSession.GetDbConn(connStr))
             {
@@ -50,7 +49,7 @@ namespace dbaccess.helper.tools.Repository
             }
         }
 
-        public TKey Insert<TKey>(string connStr, T obj)
+        public TKey Add<TKey>(string connStr, T obj)
         {
             using (var conn = _dbSession.GetDbConn(connStr))
             {
@@ -60,11 +59,19 @@ namespace dbaccess.helper.tools.Repository
 
        
 
-        public bool Update(string connStr, T obj)
+        public bool Modify(string connStr, T obj)
         {
             using (var conn = _dbSession.GetDbConn(connStr))
             {
                 return conn.Update(obj)>0;
+            }
+        }
+
+        public int Count(string connStr, string conditions = "", object parameters = null)
+        {
+            using (var conn=_dbSession.GetDbConn(connStr))
+            {
+                return conn.RecordCount<T>();
             }
         }
     }

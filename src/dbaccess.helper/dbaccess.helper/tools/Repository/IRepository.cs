@@ -16,34 +16,34 @@ namespace dbaccess.helper.tools
         /// <param name="connStr"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        T Get(string connStr, object id);
+        T Find(string connStr, object id);
         /// <summary>
         /// 获取所有
         /// </summary>
         /// <param name="connStr"></param>
         /// <returns></returns>
-        IEnumerable<T> GetAll(string connStr);
+        IEnumerable<T> Query(string connStr);
         /// <summary>
         /// 插入单条
         /// </summary>
         /// <param name="connStr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        TKey Insert<TKey>(string connStr, T obj);
+        TKey Add<TKey>(string connStr, T obj);
         /// <summary>
         /// 更新
         /// </summary>
         /// <param name="connStr"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        bool Update(string connStr, T obj);
+        bool Modify(string connStr, T obj);
         /// <summary>
         /// 根据id删除
         /// </summary>
         /// <param name="connStr"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        bool Delete(string connStr, object id);
+        bool Remove(string connStr, object id);
         /// <summary>
         /// 根据条件删除
         /// </summary>
@@ -51,9 +51,16 @@ namespace dbaccess.helper.tools
         /// <param name="conditions"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        bool Delete(string connStr, string conditions, object param);
-
-
+        bool Remove(string connStr, string conditions, object param);
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <param name="connStr"></param>
+        /// <param name="conditions"></param>
+        /// <param name="parameters"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        int Count(string connStr, string conditions = "", object parameters = null);
 
     }
 }

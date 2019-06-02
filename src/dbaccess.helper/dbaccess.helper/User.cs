@@ -12,9 +12,11 @@ namespace dbaccess.helper
     {
      
 
-       
-        public  Guid id { get; set; }
-     
+      
+        [Key,Column("id")]
+        public   string userid { get; set; }
+      
+    
         public  string name { get; set; }
         public  int age { get; set; }
     }
